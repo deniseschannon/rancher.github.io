@@ -41,7 +41,7 @@ If you run docker logs -f rancher-agent and the logs show messages about an expi
 
 #### Where can I see logs of my service?
 
-In the service details, we provide service logs in a tab called **Log**. In the **Log** tab, it lists out all events related to the service including a timestamp and description of the event.
+In the service details, we provide service logs in a tab called **Log**. In the **Log** tab, it lists out all events related to the service including a timestamp and description of the event that occurs in the API. These logs are kept for 24 hours before being deleted.
 
 ### Cross Host Communication
 
@@ -62,6 +62,7 @@ $ sudo docker run -d -e CATTLE_AGENT_IP=<HOST_IP> --privileged \
     -v /var/run/docker.sock:/var/run/docker.sock \
     rancher/agent:v0.8.2 http://SERVER_IP:8080/v1/scripts/xxxx
 ```
+
 #### Running Ubuntu, and containers are unable to communicate with each other.
 
 If you have `UFW` enabled, you can either disable `UFW` OR change `/etc/default/ufw` to:
@@ -86,11 +87,12 @@ To change Rancher's IPsec network driver, you can export the yaml files and upda
 
 ### How can I see if my DNS is set up correctly?
 
-If you want to see the configuration of the Rancher DNS setup, go to the **Stacks** -> **Infrastructure Stacks**. Find the `dns` stack and exec into any of the containers. You can use the UI and select **Execute Shell** on the container.
+If you want to see the configuration of the Rancher DNS setup, go to the **Stacks** -> **Infrastructure**. Find the `network-services` stack and select the `metadata` service. In the `metadata` service, exec into any of the containers named `network-services-metadata-dns-X`. You can use the UI and select **Execute Shell** on the container.
 
 ```bash
 $ cat /etc/rancher-dns/answers.json
 ```
+
 
 #### CentOS
 
@@ -125,6 +127,12 @@ The logs of HAProxy can be found inside the load balancer container. `docker log
 ```
 $ cat /var/log/haproxy
 ```
+
+### HA
+
+#### Rancher Compose Executor and Go-Machine-Service are continuously restarting.
+
+In an HA set, if rancher-compose-executor and go-machine-service are continuously restarting, if you are behind a proxy, please ensure that proxy protocol is being used.
 
 ### Authentication
 

@@ -50,6 +50,8 @@ $ docker tag rancher/agent:v1.1.0 localhost:5000/<NAME_OF_LOCAL_RANCHER_AGENT_IM
 $ docker push localhost:5000/<NAME_OF_LOCAL_RANCHER_AGENT_IMAGE>:v1.1.0
 ```
 
+<br>
+
 > **Note:** For any infrastructure services images, you would have to follow the same steps.
 
 #### Launching Rancher Server with Private Registry
@@ -81,6 +83,14 @@ The command from the UI will be configured to use the private registry image for
 ```bash
 $ sudo docker run -d --privileged -v /var/run/docker.sock:/var/run/docker.sock <Private_Registry_Domain>:5000/<NAME_OF_LOCAL_RANCHER_AGENT_IMAGE>:v1.1.0 http://<SERVER_IP>:8080/v1/scripts/<security_credentials>
 ```
+
+#### Configuring the Default Registry for Infrastructure Stacks
+
+In Rancher, all [infrastructure services]({{site.baseurl}}/rancher/{{page.version}}/{{page.lang}}/rancher-services/) are defaulted to pull from DockerHub. Changing the default registry from DockerHub to a different private registry is located in the API settings.
+
+* **Add the private registry:** In **Infrastructure** -> **Registries** section, add the private registry that contain the images for the infrastructure services.
+
+* **Update the default registry** Under **API**, click on the link for **Endpoint (v2-beta)**. Click on the link for **settings**, which will navigate to `v2-beta/settings`. Find the `registry.default` setting and click on the link under `self`. Edit the setting and add the private registry value. Once the `registry.default` setting has been updated, the infrastructure services will begin to pull from the private registry instead of DockerHub.
 
 ### Using HTTP Proxy
 

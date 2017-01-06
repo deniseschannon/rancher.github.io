@@ -18,7 +18,7 @@ The binary can be downloaded directly from the UI. The link can be found in the 
 
 ### Configuring the Rancher Command Line Interface
 
-There are several methods you can configure the settings that the Rancher CLI uses when interacting with Rancher, i.e. Rancher URL and [account API keys]({{site.baseurl}}/rancher/{{page.version}}/{{page.lang}}/api/api-keys/#account-api-keys). Account API keys can be created in **API** -> **Advanced Options**.
+There are several methods you can configure the settings that the Rancher CLI uses when interacting with Rancher, i.e. Rancher URL and [account API keys]({{site.baseurl}}/rancher/{{page.version}}/{{page.lang}}/api/api-keys/#account-api-keys). Account API keys can be created in **API**. 
 
 There is a specific load order for what will be used.
 
@@ -211,10 +211,12 @@ After your files are created, you can launch the services into Rancher server.
 # Creating and starting a service without environment variables and selecting a stack
 # If no stack is provided, the stack name will be the folder name that the command is running from
 # If the stack does not exist in Rancher, it will be created
-$ rancher --url URL_of_Rancher --access-key <username_of_account_api_key> --secret-key <password_of_account_api_key> --env Default up -s stack1
+# Add in -d at the end to not block and log
+$ rancher --url URL_of_Rancher --access-key <username_of_account_api_key> --secret-key <password_of_account_api_key> --env Default up -s stack1 -d
 
 # Creating and starting a service with environment variables already set
-$ rancher up -s stack1
+# Add in -d at the end to not block and log
+$ rancher up -s stack1 -d
 
 # To change the scale of an existing service, you can use stackName/serviceName or service ID
 $ rancher scale Default/service1=3

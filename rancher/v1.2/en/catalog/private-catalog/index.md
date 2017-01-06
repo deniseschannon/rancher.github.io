@@ -12,17 +12,27 @@ redirect_from:
 
 The Rancher catalog service requires private catalogs to be structured in a specific format in order for the catalog service to be able to translate it into Rancher.
 
-### Directory Structure
+### Template Folders
 
-Catalog templates are displayed in Rancher based on what cluster management type of environment that you are in.
+Catalog templates are displayed in Rancher based on what container orchestration type that was selected for the environment.
+
+#### Templates based on Orchestration type
 
 * _Cattle_ orchestration: Entries in the UI are from the `templates` folder
 * _[Kubernetes]({{site.baseurl}}/rancher/{{page.version}}/{{page.lang}}/kubernetes/)_ orchestration: Entries in the UI are from the `kubernetes-templates` folder
 * _[Swarm]({{site.baseurl}}/rancher/{{page.version}}/{{page.lang}}/swarm/)_ orchestration: Entries in the UI are from the `swarm-templates` folder
 * _[Mesos]({{site.baseurl}}/rancher/{{page.version}}/{{page.lang}}/mesos/)_ orchestration: Entries in the UI are from the `mesos-templates` folder
 
+### Infrastructure Services Templates
+
+The [infrastructure services]({{site.baseurl}}/rancher/{{page.version}}/{{page.lang}}/rancher-services/) that are available to be enabled in an [environment template]({{site.baseurl}}/rancher/{{page.version}}/{{page.lang}}/environments/#what-is-an-environment-template), are from the `infra-templates` folder of any catalog enabled in Rancher.
+
+These services are also available from the **Catalog** tab, and you will be able to see all the infrastructure services even though they may not work with the selected orchestration type. It's recommended to select infrastructure services during environment template creation versus launching them directly from the catalog. 
+
+### Directory Structure
+
 ```
--- templates OR kubernetes-templates OR swarm-templates
+-- templates (Or any of templates folder)
   |-- cloudflare
   |   |-- 0
   |   |   |-- docker-compose.yml
@@ -84,7 +94,7 @@ catalog:
   version: # Version of the versioned template of the Catalog Entry
   description: # Description of the versioned template of the Catalog Entry
   minimum_rancher_version: # The minimum version of Rancher that supports the template, v1.0.1 and 1.0.1 are acceptable inputs
-  maximum_rancher_version: # The minimum version of Rancher that supports the template, v1.0.1 and 1.0.1 are acceptable inputs
+  maximum_rancher_version: # The maximum version of Rancher that supports the template, v1.0.1 and 1.0.1 are acceptable inputs
   upgrade_from: # The previous versions that this template can be upgraded from
   questions: #Used to request user input for configuration options
 ```
