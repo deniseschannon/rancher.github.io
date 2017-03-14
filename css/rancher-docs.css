@@ -66,6 +66,11 @@ font-family: 'Lato', sans-serif;
 .sidebar {
 }
 
+.banner.bg-info{
+  border: solid 1px #78C9CF;
+  background: rgba(120, 201, 207, 0.1);
+  color: #78C9CF;
+}
 #menu {
   margin: 0;
   padding: 0;

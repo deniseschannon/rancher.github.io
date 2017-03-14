@@ -6,6 +6,9 @@ lang: en
 
 ---
 
+<div class="banner bg-info p-10">
+    This is for 1.0, for the current version see <a href="http://docs.rancher.com/">here</a>
+</div>
 
 ## Overview of Rancher
 ---
